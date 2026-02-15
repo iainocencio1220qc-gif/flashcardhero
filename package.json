@@ -1,0 +1,45 @@
+{
+  "name": "flashcard-hero",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-slot": "^1.1.0",
+    "canvas-confetti": "^1.9.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.36.1",
+    "framer-motion": "^11.11.17",
+    "lucide-react": "^0.454.0",
+    "next": "14.2.18",
+    "postgres": "^3.4.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.6.4",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.24",
+    "dotenv": "^16.6.1",
+    "drizzle-kit": "^0.28.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.18",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
+  }
+}
