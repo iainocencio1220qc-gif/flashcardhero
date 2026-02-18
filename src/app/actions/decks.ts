@@ -4,12 +4,15 @@ import { db } from "@/db";
 import { decks, cards } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 
+const OWNER_ID = process.env.DEFAULT_OWNER_ID ?? "00000000-0000-0000-0000-000000000000";
+
 export async function createDeck(formData: FormData) {
   const title = formData.get("title") as string;
   const description = (formData.get("description") as string) || null;
   const themeColor = (formData.get("themeColor") as string) || "#6366f1";
   if (!title?.trim()) return { error: "Title is required" };
   await db.insert(decks).values({
+    ownerId: OWNER_ID,
     title: title.trim(),
     description: description?.trim() || null,
     themeColor: themeColor.trim(),
@@ -26,6 +29,7 @@ export async function createDeckWithCards(
   const [inserted] = await db
     .insert(decks)
     .values({
+      ownerId: OWNER_ID,
       title: deck.title.trim(),
       description: deck.description?.trim() || null,
       themeColor: deck.themeColor || "#6366f1",
@@ -35,6 +39,7 @@ export async function createDeckWithCards(
   if (cardPairs.length > 0) {
     await db.insert(cards).values(
       cardPairs.map(({ front, back }) => ({
+        ownerId: OWNER_ID,
         deckId: inserted.id,
         front: front.trim(),
         back: back.trim(),
@@ -53,6 +58,7 @@ export async function bulkAddCards(
     return { error: "Deck ID and at least one card required" };
   await db.insert(cards).values(
     cardPairs.map(({ front, back }) => ({
+      ownerId: OWNER_ID,
       deckId,
       front: front.trim(),
       back: back.trim(),
