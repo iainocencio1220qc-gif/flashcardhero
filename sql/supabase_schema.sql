@@ -4,6 +4,7 @@ create extension if not exists pgcrypto with schema extensions;
 -- Tables
 create table if not exists public.decks (
   id uuid primary key default gen_random_uuid(),
+  owner_id uuid,
   title text not null,
   description text,
   theme_color text default '#6366f1',
@@ -13,6 +14,7 @@ create table if not exists public.decks (
 create table if not exists public.cards (
   id uuid primary key default gen_random_uuid(),
   deck_id uuid references public.decks(id) on delete cascade,
+  owner_id uuid,
   front text not null,
   back text not null,
   interval integer default 0,
@@ -29,16 +31,31 @@ create index if not exists idx_cards_next_review on public.cards(next_review);
 alter table public.decks enable row level security;
 alter table public.cards enable row level security;
 
--- Permissive policies (adjust when adding auth)
-create policy if not exists decks_all_access on public.decks
+-- Owner-based policies using auth.uid() when JWT claims are present.
+-- If no JWT claims exist (direct Postgres connection), allow access for compatibility.
+drop policy if exists decks_all_access on public.decks;
+drop policy if exists cards_all_access on public.cards;
+
+create policy decks_owner_policy on public.decks
   for all
   to public
-  using (true)
-  with check (true);
+  using (
+    current_setting('request.jwt.claims', true) is null
+    or owner_id = auth.uid()
+  )
+  with check (
+    current_setting('request.jwt.claims', true) is null
+    or owner_id = auth.uid()
+  );
 
-create policy if not exists cards_all_access on public.cards
+create policy cards_owner_policy on public.cards
   for all
   to public
-  using (true)
-  with check (true);
-
+  using (
+    current_setting('request.jwt.claims', true) is null
+    or owner_id = auth.uid()
+  )
+  with check (
+    current_setting('request.jwt.claims', true) is null
+    or owner_id = auth.uid()
+  );
