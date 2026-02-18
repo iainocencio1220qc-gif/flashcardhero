@@ -17,17 +17,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { parsePowerPaste, type ParsedCard } from "@/lib/power-paste";
 import { bulkAddCards } from "@/app/actions/decks";
-import { cn } from "@/lib/utils";
 
 interface PowerPasteDialogProps {
   deckId: string;
-  deckTitle: string;
   trigger?: React.ReactNode;
 }
 
 export function PowerPasteDialog({
   deckId,
-  deckTitle,
   trigger,
 }: PowerPasteDialogProps) {
   const [open, setOpen] = useState(false);

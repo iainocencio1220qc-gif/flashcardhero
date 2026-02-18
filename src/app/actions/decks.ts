@@ -3,7 +3,6 @@
 import { db } from "@/db";
 import { decks, cards } from "@/db/schema";
 import { revalidatePath } from "next/cache";
-import type { NewDeck, NewCard } from "@/db/schema";
 
 export async function createDeck(formData: FormData) {
   const title = formData.get("title") as string;

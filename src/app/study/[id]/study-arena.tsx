@@ -19,13 +19,11 @@ const LABELS = { 1: "Again", 2: "Hard", 3: "Good", 4: "Easy" as const };
 
 interface StudyArenaProps {
   deckId: string;
-  deckTitle: string;
   initialCards: Card[];
 }
 
 export function StudyArena({
   deckId,
-  deckTitle,
   initialCards,
 }: StudyArenaProps) {
   const [queue, setQueue] = useState<Card[]>([...initialCards]);

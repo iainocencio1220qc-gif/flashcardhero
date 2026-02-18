@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { decks, cards } from "@/db/schema";
-import { eq, lte } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { StudyArena } from "./study-arena";

@@ -113,7 +113,6 @@ export function DeckGrid({ decks, dueByDeck }: DeckGridProps) {
                       </Button>
                       <PowerPasteDialog
                         deckId={deck.id}
-                        deckTitle={deck.title}
                         trigger={
                           <Button variant="outline" size="sm" className="gap-1">
                             <Zap className="h-3.5 w-3.5" />
