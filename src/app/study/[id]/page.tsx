@@ -69,7 +69,6 @@ export default async function StudyPage({
       ) : (
         <StudyArena
           deckId={id}
-          deckTitle={deck.title}
           initialCards={dueToday}
         />
       )}
