@@ -9,7 +9,6 @@ import {
 
 export const decks = pgTable("decks", {
   id: uuid("id").primaryKey().defaultRandom(),
-  ownerId: uuid("owner_id"),
   title: text("title").notNull(),
   description: text("description"),
   themeColor: text("theme_color").default("#6366f1"),
@@ -19,7 +18,6 @@ export const decks = pgTable("decks", {
 export const cards = pgTable("cards", {
   id: uuid("id").primaryKey().defaultRandom(),
   deckId: uuid("deck_id").references(() => decks.id, { onDelete: "cascade" }),
-  ownerId: uuid("owner_id"),
   front: text("front").notNull(),
   back: text("back").notNull(),
   interval: integer("interval").default(0),
