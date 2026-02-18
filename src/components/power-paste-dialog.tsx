@@ -69,7 +69,7 @@ export function PowerPasteDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Zap className="h-5 w-5 text-amber-400" />
-            Power Paste into &quot;{deckTitle}&quot;
+            Power Paste into Deck
           </DialogTitle>
           <DialogDescription>
             Paste a block of text. Each line = one card. Split by &quot;:&quot; or &quot;-&quot; (e.g. &quot;Front : Back&quot;).
